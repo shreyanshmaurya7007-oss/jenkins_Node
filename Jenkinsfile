@@ -2,27 +2,21 @@ pipeline {
     agent any
 
     stages {
-        stage('Git Checkout') {
+        stage('Build') {
             steps {
-                checkout scm
+                sh 'bash app.sh'
             }
         }
 
-        stage('Install Dependencies') {
+        stage('Test') {
             steps {
-                sh 'npm install'
+                sh 'bash test.sh'
             }
         }
 
-        stage('Run Application') {
+        stage('Deploy') {
             steps {
-                sh 'npm start'
-            }
-        }
-
-        stage('Run Test') {
-            steps {
-                sh 'npm test'
+                echo 'Deployment successful!'
             }
         }
     }
